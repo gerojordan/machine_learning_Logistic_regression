@@ -178,7 +178,8 @@ print("----Predicciones----")
 predictions = model.predict(X_validation)
 print(accuracy_score(Y_validation, predictions))
 
-print("----Matriz de confusion---") #muestra cuantos resultados equivocados tuvo de cada clase (los que no están en la diagonal)
+print("----Matriz de confusion---") #muestra cuantos resultados equivocados o correctos tuvo de cada 
+#clase diagonal (\) correctos (se suman) y diagonal (/) incorrectos. y segun cada columna cuantos erroneos o correctos de cada valor
 print(confusion_matrix(Y_validation, predictions))
 
 print("----reporte de clasificacion---")# F1-score, que tiene en cuenta la precisión y recall. °support cuantos registros se usaron de cada posibilidad 1 o 0 |recall 1 sin error 0.5 mitad errores mitas aciertos sobre la cant de support
