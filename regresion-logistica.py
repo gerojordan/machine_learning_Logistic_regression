@@ -188,3 +188,21 @@ print(classification_report(Y_validation, predictions))
 print("----probamos datos de entrada en el modelo a ver que predice")
 X_new = pd.DataFrame({'Total_abono': [0], 'saldo': [0]})
 model.predict(X_new)
+
+
+print("----CURVA ROC----")#usada para clasificadores binarios un buen clasificador suele permanecer lejos de la linea de puntos
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_curve
+logit_roc_auc = roc_auc_score(Y_validation, model.predict(X_validation))
+fpr, tpr, thresholds = roc_curve(Y_validation, model.predict_proba(X_validation)[:,1])
+plt.figure()
+plt.plot(fpr, tpr, label='Logistic Regression (area = %0.2f)' % logit_roc_auc)
+plt.plot([0, 1], [0, 1],'r--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positivo Rate')
+plt.ylabel('True Positivo Rate')
+plt.title('Receiver operating characteristic')
+plt.legend(loc="lower right")
+plt.savefig('Log_ROC')
+plt.show()
